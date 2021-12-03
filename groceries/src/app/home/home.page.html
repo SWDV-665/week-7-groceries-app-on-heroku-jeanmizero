@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <!-- Add template -->
+        <ion-title>{{title}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" padding>
+    <h3 class="display-message" *ngIf="items.length === 0">No Item Availalbe!</h3>
+    <ion-list>
+        <!-- NgFor is a built-in template directive that makes it easy to iterate over something like an array -->
+        <ion-item-sliding *ngFor="let item of items; let i = index">
+            <ion-item>
+                <ion-label>
+                    <h2>{{item.name}}</h2>
+                    <br />
+                    <p>{{item.quantity}}</p>
+                </ion-label>
+            </ion-item>
+            <!-- Delete icon -->
+            <ion-item-options side="end">
+                <ion-item-option (click)="editItem(item,i)">
+                    <ion-button color="primary">
+                        <ion-icon name="create"></ion-icon>
+                        Edit
+                    </ion-button>
+                </ion-item-option>
+
+                <!-- Share option -->
+                <ion-item-option (click)="shareItem(item,i)">
+                    <ion-button color="light">
+                        <!-- <ion-icon name="share"></ion-icon> -->
+                        <ion-icon name="share"></ion-icon>
+                        Share
+                    </ion-button>
+                </ion-item-option>
+
+                <!-- Edit icon -->
+                <ion-item-option (click)="removeItem(item,i)">
+                    <ion-button color="danger">
+                        <ion-icon name="trash"></ion-icon>
+                        Done
+                    </ion-button>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <!-- Fabs are container elements that contain one or more fab buttons. -->
+    <!-- fab placed to the bottom end -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="addItem()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
